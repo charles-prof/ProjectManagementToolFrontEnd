@@ -14,4 +14,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    cors: {
+      origin: import.meta.env.VITE_API_URL, 
+      credentials: true,
+    },
+  },
 })
