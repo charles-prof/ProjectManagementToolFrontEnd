@@ -18,7 +18,7 @@ function Login() {
     const navigate = useNavigate();
 
     // ✅ get auth state from redux
-    const { jwt, user, loading } = useSelector((store) => store.auth);
+    const { jwt, user, loading, error } = useSelector((store) => store.auth);
 
     const form = useForm({
         defaultValues: {
@@ -41,6 +41,21 @@ function Login() {
     return (
         <div className="space-y-5">
             <h1 className="title">Login</h1>
+            {error && error.response?.status === 403 && (
+                <div className="flex flex-col items-center justify-center p-3 border border-red-400 bg-red-100 rounded-md text-red-600 gap-2">
+                    <p className="font-semibold">Invalid email or password</p>
+                    <div className="flex items-center gap-2 text-sm text-red-700">
+                        <span>Forgot your password?</span>
+                        <Button
+                            variant="link"
+                            onClick={() => navigate("/forgot-password")}
+                            className="p-0 h-auto font-bold underline"
+                        >
+                            Reset it here
+                        </Button>
+                    </div>
+                </div>
+            )}
             <Form {...form}>
                 <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField
