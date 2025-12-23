@@ -38,11 +38,7 @@ export const login=userData=>async(dispatch)=>{
 export const getUser=()=>async(dispatch)=>{
     dispatch({type:GET_USER_REQUEST})
     try{
-       const {data} = await api.get(`${API_BASE_URL}/api/users/profile`,{
-          headers:{
-             Authorization:`Bearer ${localStorage.getItem("jwt")}`
-          }
-       })
+       const {data} = await api.get(`${API_BASE_URL}/api/users/profile`)
       //  if(data.jwt){
       //     localStorage.setItem('jwt',data.jwt)
           dispatch({type:GET_USER_SUCCESS,payload:data})
