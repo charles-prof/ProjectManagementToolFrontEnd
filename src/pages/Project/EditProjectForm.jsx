@@ -42,7 +42,6 @@ export default function EditProjectForm({ project }) {
 
     const onSubmit = (data) => {
         dispatch(createProjects(data))
-        console.log(data)
     }
 
     return (<div>

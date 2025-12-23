@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux"
 import { createComment } from "@/Redux/Comment/Action"
 
 function CreateCommentForm({ issueId }) {
+    
     const dispatch=useDispatch()
     const form = useForm({
         defaultValues: {
@@ -22,7 +23,6 @@ function CreateCommentForm({ issueId }) {
 
     const onSubmit = (data) => {
         dispatch(createComment( {content:data.content,issueId} ))
-        console.log("create project data ", data)
     }
 
     return (

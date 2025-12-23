@@ -17,7 +17,6 @@ function ProjectCard({ item }) {
   }
 
   const handleUpdate = () => {
-    console.log(updateProject)
     dispatch(updateProject(item.id))
   }
 

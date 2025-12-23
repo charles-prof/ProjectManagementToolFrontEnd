@@ -18,20 +18,21 @@ import { fetchIssueById, updateIssueStatus } from "@/Redux/Issue/Action";
 import { fetchComments } from "@/Redux/Comment/Action";
 
 function IssueDetails() {
+
     const { issueId } = useParams()
     const dispatch = useDispatch()
+
     const handleUpdateIssueStatus = (status) => {
         dispatch(updateIssueStatus({ id: issueId, status }))
-        console.log(status)
     }
 
     useEffect(() => {
         dispatch(fetchIssueById(issueId))
         dispatch(fetchComments(issueId))
     }, [issueId])
+
     const issueDetails = useSelector((state) => state.issue.issueDetails);
     const comments = useSelector((state) => state.comment.comments);
-    console.log('issueDetails from store', issueDetails);
 
     return (
         <div className="px-20 py-8 text-gray-400">

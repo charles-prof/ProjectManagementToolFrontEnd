@@ -11,13 +11,15 @@ import { fetchIssues } from "@/Redux/Issue/Action"
 import { useParams } from "react-router-dom"
 
 function IssueList ({title , status }) {
+    
     const dispatch = useDispatch();
     const {id} = useParams();
     const {issue} = useSelector(store=>store)
+
     useEffect(() => {
         dispatch(fetchIssues(id))
-        console.log('id from issueLIst',id)
     },[id])
+
     return (
         <div>
            <Dialog>

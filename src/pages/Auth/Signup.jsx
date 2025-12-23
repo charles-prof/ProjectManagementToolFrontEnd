@@ -22,7 +22,6 @@ function Signup() {
 
     const onSubmit = (data) => {
         dispatch(register(data))
-        console.log("create project data", data);
     }
 
     return (

@@ -46,7 +46,6 @@ function CreateIssueForm({status}) {
                 projectId:id,
                 status,
             }))
-               console.log("issue",data)
         }
 
     

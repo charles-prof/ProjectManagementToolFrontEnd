@@ -9,7 +9,6 @@ const api = axios.create({ baseURL: import.meta.env.VITE_BASE_URL, withCredentia
 api.interceptors.request.use(
   (config) => {
     const jwt = localStorage.getItem("jwt");
-    console.log("jwt", jwt);
     if (jwt) {
       config.headers.Authorization = `Bearer ${jwt}`;
     }

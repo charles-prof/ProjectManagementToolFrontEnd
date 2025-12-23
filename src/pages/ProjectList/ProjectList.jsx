@@ -43,16 +43,15 @@ const ProjectList = () => {
         else {
             dispatch(fetchProjects({ category: value }))
         }
-        console.log("value", value);
     }
 
     const handleFilterTags = (value) => {
         dispatch(fetchProjects({ tag: value }))
     }
 
-    // useEffect(() => {
-    //     dispatch(fetchProjects({}))
-    // },[])
+    useEffect(() => {
+        dispatch(fetchProjects({}))
+    },[])
 
     const handleSearchChange = (e) => {
         setKeyword(e.target.value)
@@ -132,9 +131,7 @@ const ProjectList = () => {
                     </div>
                     <div>
                         <div className='space-y-5 min-h-[74vh]'>
-                            {
-                                keyword ? project.searchProjects?.map((item) => <ProjectCard key={item.id} item={item} />) : project.projects?.map((item) => (<ProjectCard key={item.id} item={item} />))
-                            }
+                            
                         </div>
                     </div>
                 </section>

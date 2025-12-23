@@ -41,7 +41,6 @@ function CreateProjectForm() {
 
     const onSubmit = (data) => {
         dispatch(createProjects(data))
-        console.log(data)
     }
 
     return (<div>

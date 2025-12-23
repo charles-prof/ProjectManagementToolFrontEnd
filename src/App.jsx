@@ -11,15 +11,16 @@ import { getUser } from "./Redux/Auth/Action";
 import { fetchProjects } from "./Redux/Project/Action";
 import UpgradeSuccess from "./pages/Subscription/UpgradeSuccess";
 import AcceptInvitation from "./pages/Project/AcceptInvitation";
+
 function App() {
+
   const dispatch=useDispatch();
   const {auth} = useSelector(store => store)
+
   useEffect(()=> {
      dispatch(getUser())
      dispatch(fetchProjects({}))
   },[auth.jwt])
-
-  console.log(auth)
 
   return (
     <>

@@ -50,7 +50,7 @@ export default function MetricsDashboard() {
   return (
     <div className="p-6 space-y-6">
       {/* Top Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
           title="Memory Usage"
           value={`${metrics.memory.used} MB`}
@@ -75,10 +75,10 @@ export default function MetricsDashboard() {
           extra="hh:mm:ss"
           percent={100}
         />
-      </div>
+      </div> */}
 
       {/* HTTP Requests Chart */}
-      <Card>
+      {/* <Card>
         <CardHeader>HTTP Requests</CardHeader>
         <CardContent>
           <div className="h-80">
@@ -103,7 +103,7 @@ export default function MetricsDashboard() {
             </ResponsiveContainer>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 }
