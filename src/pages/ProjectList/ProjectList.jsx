@@ -139,7 +139,7 @@ const ProjectList = () => {
         // 1. Identify which list to display
         const projectsToDisplay = keyword ? project.searchProjects : project.projects;
 
-        if (projectsToDisplay.length > 0) {
+        if (Array.isArray(projectsToDisplay) && projectsToDisplay.length > 0) {
             return (
                 <div className='space-y-5 min-h-[74vh]'>
                     {projectsToDisplay.map((item) => (
