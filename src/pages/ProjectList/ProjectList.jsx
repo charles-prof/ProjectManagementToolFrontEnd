@@ -139,21 +139,21 @@ const ProjectList = () => {
         // 1. Identify which list to display
         const projectsToDisplay = keyword ? project.searchProjects : project.projects;
 
-        return (
-            <div className='space-y-5 min-h-[74vh]'>
-                {projectsToDisplay && projectsToDisplay.length > 0 ? (
-                    // 2. Map through the identified list
-                    projectsToDisplay.map((item) => (
+        if (projectsToDisplay.length > 0) {
+            return (
+                <div className='space-y-5 min-h-[74vh]'>
+                    {projectsToDisplay.map((item) => (
                         <ProjectCard key={item.id} item={item} />
-                    ))
-                ) : (
-                    // 3. Fallback state
-                    <div className="flex items-center justify-center h-32 text-gray-500">
+                    ))}
+                </div>
+            )
+        } else {
+            return (
+                <div className="flex items-center justify-center h-32 text-gray-500">
                         {keyword ? "No projects found." : "Create your first project!"}
                     </div>
-                )}
-            </div>
-        );
+            )
+        }
     }
 }
 
