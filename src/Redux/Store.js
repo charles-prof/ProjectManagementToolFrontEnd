@@ -7,6 +7,7 @@ import commentReducer from "./Comment/Reducer"
 import issueReducer from "./Issue/Reducer"
 import subscriptionReducer from "./Subscription/Reducer"
 import metricsReducer from "./Metrics/Reducer"
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const rootReducer = combineReducers({
      auth:authReducer,
@@ -18,4 +19,4 @@ const rootReducer = combineReducers({
      metrics:metricsReducer,
 })
 
-export const store = legacy_createStore(rootReducer,applyMiddleware(thunk))
+export const store = legacy_createStore(rootReducer,composeWithDevTools(applyMiddleware(thunk), ))
