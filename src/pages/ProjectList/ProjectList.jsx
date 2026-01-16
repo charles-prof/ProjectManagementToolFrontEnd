@@ -37,7 +37,7 @@ const ProjectList = () => {
     const { project } = useSelector(store => store)
 
     const handleFilterCategory = (value) => {
-        if(value=="all") {
+        if (value == "all") {
             dispatch(fetchProjects({}))
         }
         else {
@@ -51,7 +51,7 @@ const ProjectList = () => {
 
     useEffect(() => {
         dispatch(fetchProjects({}))
-    },[])
+    }, [])
 
     const handleSearchChange = (e) => {
         setKeyword(e.target.value)
@@ -129,19 +129,32 @@ const ProjectList = () => {
 
                         </div>
                     </div>
-                    <div>
-                        <div className='space-y-5 min-h-[74vh]'>
-                            {
-                                keyword 
-                                ? project.searchProjects?.map((item) => <ProjectCard key={item.id} item={item}/>)
-                                : project.projects?.map((item) => <ProjectCard key={item.id} item={item}/>)
-                            }
-                        </div>
-                    </div>
+                    {renderProjectList()}
                 </section>
             </div>
         </>
     )
+
+    function renderProjectList() {
+        // 1. Identify which list to display
+        const projectsToDisplay = keyword ? project.searchProjects : project.projects;
+
+        return (
+            <div className='space-y-5 min-h-[74vh]'>
+                {projectsToDisplay && projectsToDisplay.length > 0 ? (
+                    // 2. Map through the identified list
+                    projectsToDisplay.map((item) => (
+                        <ProjectCard key={item.id} item={item} />
+                    ))
+                ) : (
+                    // 3. Fallback state
+                    <div className="flex items-center justify-center h-32 text-gray-500">
+                        {keyword ? "No projects found." : "Create your first project!"}
+                    </div>
+                )}
+            </div>
+        );
+    }
 }
 
 export default ProjectList
