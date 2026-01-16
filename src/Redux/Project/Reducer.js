@@ -19,7 +19,7 @@ const initialState = {
     loading:false,
     error: null,
     projectDetails:null,
-    searchProject:[]
+    searchProjects:[]
 }
 
 export const projectReducer = (state = initialState,action) => {
