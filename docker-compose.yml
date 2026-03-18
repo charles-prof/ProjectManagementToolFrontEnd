@@ -1,0 +1,58 @@
+services:
+  db:
+    image: mariadb:10.11-alpine
+    container_name: pmt-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: railway
+    # RAM Optimizations for MariaDB
+    command: [
+      "mariadbd",
+      "--performance-schema=OFF",
+      "--innodb-buffer-pool-size=16M",
+      "--innodb-log-buffer-size=1M",
+      "--max-connections=10",
+      "--innodb-stats-on-metadata=OFF",
+      "--innodb-flush-log-at-trx-commit=0"
+    ]
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pmt_db_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ../ProjectManagementToolBackEnd
+      dockerfile: Dockerfile
+    container_name: pmt-backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_PROFILES_ACTIVE=production
+      - JWT_SECRET=r2EhMMwDKmpiUgvq0gih5dPEIp1ZQo0G67kdIyovb0M=
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:8080
+    container_name: pmt-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  pmt_db_data:
